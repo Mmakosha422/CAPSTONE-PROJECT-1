@@ -58,21 +58,9 @@ Contains scripts and files used to create visualisations.
 
 | RAAIDD | Description |
 |---|---|
-|**Risks** |1. The STADIOcare organisation may contain incorrect records and also missing data which may result in incorrect interpretations and analysis down the line. 
-
-2. Since STADIOcare primarily contains sensitive data, incorrect interpretations or analysis could possibly result in confidentiality risks. |
-| **Actions** |1. The Data cleaning process is required to ensure consistance throught. 
-
-2. Data capturers and healthcare workers must ensure that patient admission, discharge and readmission information is recorded accurately and consistently in the relevant systems.  |
-| **Assumptions** | 1. Assuming that STADIOcare will be able to provide enough data that is related to the problem stataement. 
-
-2. Assuming that patient admission and discharge dates are recorded daily and accurately in the relevant healthcare systems. |
-| **Issues** | 1. Errors in capturing patients  information may result in inaccurate admission, discharge or readmission records, affecting the accuracy of the 30-day readmission analysis. 
-
-2. Missing clinical information may cause an issue down the line when identifying important factors that are related to readmission.The dataset is too large to upload in the software. |
-| **Decisions** | 1. The main goal is to stick to basic machine learning models since dataset is not too complex. 
-
-2. The patient information that will be used will remain anonymise to protect the privacy of each patient.  |
-| **Dependencies** |1. The historical data from STADIOcare is needed before any steps can occur. 
-
-2. Dataset from other facilities are required in oreder to be able to compare and analyse 30 day readmission patterns  and identify the gap. The usage of other external datasets like kaggle and datacamp will be helpful with comparison to the STADIOcare dataset.  |
+|**Risks** |1. The STADIOcare organisation may contain incorrect records and also missing data which may result in incorrect interpretations and analysis down the line. 2. Since STADIOcare primarily contains sensitive data, incorrect interpretations or analysis could possibly result in confidentiality risks. |
+| **Actions** |1. The Data cleaning process is required to ensure consistance throught. 2. Data capturers and healthcare workers must ensure that patient admission, discharge and readmission information is recorded accurately and consistently in the relevant systems.  |
+| **Assumptions** | 1. Assuming that STADIOcare will be able to provide enough data that is related to the problem stataement.2. Assuming that patient admission and discharge dates are recorded daily and accurately in the relevant healthcare systems. |
+| **Issues** | 1. Errors in capturing patients  information may result in inaccurate admission, discharge or readmission records, affecting the accuracy of the 30-day readmission analysis. 2. Missing clinical information may cause an issue down the line when identifying important factors that are related to readmission.The dataset is too large to upload in the software. |
+| **Decisions** | 1. The main goal is to stick to basic machine learning models since dataset is not too complex. 2. The patient information that will be used will remain anonymise to protect the privacy of each patient.  |
+| **Dependencies** |1. The historical data from STADIOcare is needed before any steps can occur. 2. Dataset from other facilities are required in oreder to be able to compare and analyse 30 day readmission patterns  and identify the gap. The usage of other external datasets like kaggle and datacamp will be helpful with comparison to the STADIOcare dataset.  |
