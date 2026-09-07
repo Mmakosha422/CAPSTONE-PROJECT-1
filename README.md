@@ -5,12 +5,18 @@
 ## 1. Project Motivation - PART A
 STADIOcare Group is one of the leading private healthcare organisations in South Africa, that provides essential healthcare services nationwide. These primarily include acute hospital care, day surgery centres, emergency medical services, primary care clinics and mental health services.
 Although STADIOcare group operates under a simple promise "the right care, in the right place, at the right time." Howvever, one of the major challanges that the  organisation faces is an increasing rate of patients readmission within 30 days of discharge. According to the STADIOcare brief pack, the 30 day readamission rate increased from  8.9% to 11.3% and at the same time time, the average stay length increased from 3.9 to 4.2 nights. This is becoming a pressing issue because the cost of hospital resources and patient care is getting alot harder. 
-The STADIOcare 2030 Strategy aim to set five priorities for the next five years which includes: 
-–	Fill the beds we have, safely. 
-–	Keep patients out of hospital when they should be.
-–	Protect the margin. 
-–	Make Serene the market leader in mental health. 
-–	Become a data-led business.
+First paragraph ends here.
+
+
+The STADIOcare 2030 Strategy sets five priorities for the next five years:
+
+- Fill the beds we have, safely.
+- Keep patients out of hospital when they should be.
+- Protect the margin.
+- Make Serene the market leader in mental health.
+- Become a data-led business.
+Second paragraph ends here.
+
 Of these priorities, the second is particularly relevant to this project because it focuses on supporting patients who are likely to return to hospital within a month. STADIOcare provides healthcare data such as admission, discharge and transfer data, including patient movements, wards, procedure codes, and discharge status, with five years of historical data available. Using this data to analyse and investigate this challenge will provide a clear understanding of patterns related to patients who are readmitted within 30 days of discharge. 
 In conclusion, the the Capstone project is to investigate and understand the main factors associated with 30 day patient readmission and investigate whether relevant healthcare data can be used to identify which patients are more likely to be readmitted within 30 days of discharge. With this type of insight and understanding, patient management and decision-making will make STADIOcare system run much more effectively and smoothly while ensuring each patient recieves the best healthcare treatment. 
 
