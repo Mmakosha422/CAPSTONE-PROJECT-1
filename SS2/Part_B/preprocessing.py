@@ -1,25 +1,33 @@
 import pandas as pd
 from pathlib import Path
+from sklearn.model_selection import train_test_split
+from sklearn.impute import SimpleImputer
 
 
-# Load the original dataset
+# ---------------------------------------------------------
+# 1. Load the original dataset
+# ---------------------------------------------------------
+
 DATA_PATH = Path(__file__).resolve().parent / "diabetic_data.csv"
 
 df = pd.read_csv(DATA_PATH)
 
-# Replace '?' with missing values
+print("Dataset loaded successfully.")
+print("Original shape:", df.shape)
+
+
+# ---------------------------------------------------------
+# 2. Replace '?' with missing values
+# ---------------------------------------------------------
+
 df = df.replace("?", pd.NA)
 
-# Display basic information
-print("Dataset loaded successfully.")
-print("Shape:", df.shape)
-print("\nFirst 5 rows:")
-print(df.head())
 
-print("\nMissing values per column:")
-print(df.isna().sum())
+# ---------------------------------------------------------
+# 3. Remove columns with a very high proportion of
+#    missing values
+# ---------------------------------------------------------
 
-# Remove columns with a very high proportion of missing values
 columns_to_drop = [
     "weight",
     "max_glu_serum",
@@ -30,38 +38,164 @@ columns_to_drop = [
 
 df = df.drop(columns=columns_to_drop)
 
-# Fill missing categorical values with the most frequent value
-categorical_columns = ["race", "diag_1", "diag_2", "diag_3"]
-
-for column in categorical_columns:
-    df[column] = df[column].fillna(df[column].mode()[0])
-
-
-print("\nRemaining missing values:")
-print(df.isna().sum().sum())
-
-print("\nColumns removed:")
+print("\nColumns removed because of high missingness:")
 print(columns_to_drop)
 
-print("\nNew dataset shape:")
-print(df.shape)
 
-# Remove identifier columns
-identifier_columns = ["encounter_id", "patient_nbr"]
+# ---------------------------------------------------------
+# 4. Remove identifier columns
+# ---------------------------------------------------------
+
+identifier_columns = [
+    "encounter_id",
+    "patient_nbr"
+]
 
 df = df.drop(columns=identifier_columns)
 
 print("\nIdentifier columns removed:")
 print(identifier_columns)
 
-print("\nDataset shape after removing identifiers:")
-print(df.shape)
+
+# ---------------------------------------------------------
+# 5. Create the binary target
+#    1 = readmitted within 30 days
+#    0 = not readmitted within 30 days
+# ---------------------------------------------------------
+
+df["readmitted_within_30_days"] = df["readmitted"].map({
+    "<30": 1,
+    ">30": 0,
+    "NO": 0
+})
 
 
-# Save the cleaned dataset
-OUTPUT_PATH = Path(__file__).resolve().parent / "cleaned_data.csv"
+# ---------------------------------------------------------
+# 6. Separate features and target
+# ---------------------------------------------------------
 
-df.to_csv(OUTPUT_PATH, index=False)
+X = df.drop(
+    columns=["readmitted", "readmitted_within_30_days"]
+)
 
-print("\nCleaned dataset saved successfully.")
-print("Saved to:", OUTPUT_PATH)
+y = df["readmitted_within_30_days"]
+
+
+# ---------------------------------------------------------
+# 7. Split the data BEFORE fitting imputers
+# ---------------------------------------------------------
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.20,
+    random_state=42,
+    stratify=y
+)
+
+
+print("\nTraining set:")
+print("X_train:", X_train.shape)
+print("y_train:", y_train.shape)
+
+print("\nTesting set:")
+print("X_test:", X_test.shape)
+print("y_test:", y_test.shape)
+
+
+# ---------------------------------------------------------
+# 8. Identify categorical and numerical columns
+# ---------------------------------------------------------
+
+categorical_columns = X_train.select_dtypes(
+    include=["object", "string"]
+).columns.tolist()
+
+numerical_columns = X_train.select_dtypes(
+    include=["number"]
+).columns.tolist()
+
+
+print("\nNumber of categorical columns:",
+      len(categorical_columns))
+
+print("Number of numerical columns:",
+      len(numerical_columns))
+
+
+# ---------------------------------------------------------
+# 9. Impute missing values
+#    IMPORTANT: imputers are fitted ONLY on training data
+# ---------------------------------------------------------
+
+categorical_imputer = SimpleImputer(
+    strategy="most_frequent"
+)
+
+numerical_imputer = SimpleImputer(
+    strategy="median"
+)
+
+
+X_train[categorical_columns] = categorical_imputer.fit_transform(
+    X_train[categorical_columns]
+)
+
+X_test[categorical_columns] = categorical_imputer.transform(
+    X_test[categorical_columns]
+)
+
+
+X_train[numerical_columns] = numerical_imputer.fit_transform(
+    X_train[numerical_columns]
+)
+
+X_test[numerical_columns] = numerical_imputer.transform(
+    X_test[numerical_columns]
+)
+
+
+# ---------------------------------------------------------
+# 10. Check for remaining missing values
+# ---------------------------------------------------------
+
+print("\nMissing values in X_train:",
+      X_train.isna().sum().sum())
+
+print("Missing values in X_test:",
+      X_test.isna().sum().sum())
+
+
+# ---------------------------------------------------------
+# 11. Save the processed train/test datasets
+# ---------------------------------------------------------
+
+OUTPUT_DIR = Path(__file__).resolve().parent
+
+X_train.to_csv(
+    OUTPUT_DIR / "X_train.csv",
+    index=False
+)
+
+X_test.to_csv(
+    OUTPUT_DIR / "X_test.csv",
+    index=False
+)
+
+y_train.to_csv(
+    OUTPUT_DIR / "y_train.csv",
+    index=False
+)
+
+y_test.to_csv(
+    OUTPUT_DIR / "y_test.csv",
+    index=False
+)
+
+
+print("\nProcessed datasets saved successfully.")
+
+print("X_train.csv")
+print("X_test.csv")
+print("y_train.csv")
+print("y_test.csv")
