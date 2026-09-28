@@ -52,15 +52,26 @@ Run the preprocessing script:
 ```powershell
 & "$env:USERPROFILE\anaconda3\envs\ds182\python.exe" SS2\Part_B\preprocessing.py
 
+python SS2\Part_B\preprocessing.py
+
+
+
 ### Step 2- Feature Engineering
 
 Run the feature engineering script:
 & "$env:USERPROFILE\anaconda3\envs\ds182\python.exe" SS2\Part_B\feature_engineering.py
+
+python SS2\Part_B\feature_engineering.py
+
 
 ### Step 3 - Model 1: Logistic Regression
 Run the scripts in the following order.
 
 & "$env:USERPROFILE\anaconda3\envs\ds182\python.exe" SS2\Part_B\model1.py
 
+python SS2\Part_B\model1.py
+
 ### Step 4 - Model 2: Random Forest
 & "$env:USERPROFILE\anaconda3\envs\ds182\python.exe" SS2\Part_B\model2.py
+
+python SS2\Part_B\model2.py
