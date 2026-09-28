@@ -1,32 +1,36 @@
-# SS2 Part B - Machine Learning Models
+# SS2 Part B - Data Preparation and Modelling
 
 ## Project Introduction
 
-This project investigates factors associated with 30-day hospital readmission using healthcare data and machine-learning classification techniques.
+In this project, factors associated with 30-day readmission were investigated using healthcare data and machine-learning classification techniques. 
 
-The public dataset used for this proof-of-concept is the Diabetes 130-US Hospitals dataset.
+The public dataset that was used for this proof-of-concept is the Diabetes 130-US Hospitals dataset.
 
 The target variable is:
 
 - `1` = readmitted within 30 days
 - `0` = not readmitted within 30 days
 
-## Part B Workflow
+## Project Workflow
 
-## The project follows the following workflow:
+The project follows these main steps:
 
-```text
-Raw Dataset
-     ↓
-Preprocessing
-     ↓
-Feature Engineering
-     ↓
-Model 1: Logistic Regression
-     ↓
-Model 2: Random Forest
-     ↓
-Model Evaluation
+1. **Data Preparation** – The raw dataset was loaded and cleaned
+2. **Data Preprocessing** – Missing values were handled,  unsuitable variables were removed and the data for modelling was prepared.
+3. **Feature Engineering** – additional features were created to help predict the 30-day hospital readmissions.
+4. **Model 1: Logistic Regression** –  A Logistic Regression classification model was developed.
+5. **Model 2: Random Forest** – A Random Forest classification model was developed.
+6. **Model Evaluation** – The performance and evaluation of both models were compared.
+
+## Running the Project
+The Python scripts should be run in the following order:
+
+1. `preprocessing.py`
+2. `feature_engineering.py`
+3. `model1.py`
+4. `model2.py`
+
+Make sure the required Python packages listed in `requirements.txt` are installed before running the scripts.
 
 Running the Project
 
